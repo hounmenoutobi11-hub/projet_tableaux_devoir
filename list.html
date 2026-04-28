@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>listperson</title>
+    <link rel="stylesheet" href="list.css">
+</head>
+
+<body>
+    
+    <form class="form">
+        <div class="form_item">
+            <label for="last_name">Last Name</label>
+            <input type="text" name="last_name">
+        </div>
+        <div class="form_item">
+            <label for="first_name">First Name</label>
+            <input type="text" name="first_name">
+        </div>
+        <div class="form_item">
+            <label for="adress">Adress</label>
+            <input type="text" name="adress">
+        </div>
+        <div class="form_item">
+            <label for="contact">Contact</label>
+            <input type="number" name="contact">
+        </div>
+        <div class="form_item">
+            <button type="submit">Save</button>
+        </div>
+    </form>
+    <div>
+        <table>
+            <caption class="title"> Liste des Etudiants</caption>
+            <thead>
+                <tr>
+                    <th>N°</th>
+                    <th>Last Name</th>
+                    <th>First Name</th>
+                    <th>Adress</th>
+                    <th>contact</th>
+                </tr>
+
+            </thead>
+            <tbody id="tableBody"></tbody>
+
+        </table>
+    </div>
+    <script src="list.js"></script>
+</body>
+
+</html>
