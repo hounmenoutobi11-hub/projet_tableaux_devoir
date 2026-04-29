@@ -1,4 +1,4 @@
-const form_tag = document.querySelector('form');
+/* const form_tag = document.querySelector('form');
 const tbody = document.querySelector('#tableBody');
 
 chargerDonnees();
@@ -57,4 +57,25 @@ function afficherDansTableau(profil, numero) {
         <td>${profil.contact}</td>
     `;
     tbody.appendChild(newRow);
+} */
+
+class Student{
+    constructor(){
+        this.lastname = ''
+        this.firstname = ''
+        this.adress = ''
+        this.contact = ''
+    }
+
+    registered(){
+
+    }
+
+    edit(){
+
+    }
+
+    delete(){
+
+    }
 }
