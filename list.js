@@ -59,23 +59,134 @@ function afficherDansTableau(profil, numero) {
     tbody.appendChild(newRow);
 } */
 
-class Student{
-    constructor(){
+class Student {
+    constructor() {
         this.lastname = ''
         this.firstname = ''
         this.adress = ''
         this.contact = ''
     }
 
-    registered(){
+    registered() {
+        const form_tag = document.getElementById('studentform')
+        if (form_tag) {
+            form_tag.addEventListener('submit', (e) => {
+                e.preventDefault()
+                const lastnameTagValue = form_tag.querySelector('input[name="last_name"]').value
+                const firstnameTagValue = form_tag.querySelector('input[name="first_name"]').value
+                const adressTagValue = form_tag.querySelector('input[name="adress"]').value
+                const contactTagValue = form_tag.querySelector('input[name="contact"]').value
+
+                if (lastnameTagValue == '' || firstnameTagValue == '' || adressTagValue == '' || contactTagValue == '') {
+                    alert("Veuillez remplir tous les champs. ")
+                    return
+                }
+
+                const studentList = JSON.parse(localStorage.getItem('studentList')) || []
+                const studentInfos = {
+                    id: studentList.length + 1,
+                    lastname: lastnameTagValue,
+                    firstname: firstnameTagValue,
+                    address: adressTagValue,
+                    contact: contactTagValue
+                }
+                studentList.push(studentInfos)
+
+                localStorage.setItem('studentList', JSON.stringify(studentList))
+                this.display()
+
+                form_tag.reset()
+
+            })
+        }
 
     }
 
-    edit(){
+    edit() {
 
     }
 
-    delete(){
+    delete(studentId) {
+        const studentList = JSON.parse(localStorage.getItem('studentList'))
+        const otherStudent = studentList.filter((item)=> item.id !== studentId)
+        localStorage.setItem('studentList', JSON.stringify(otherStudent))
+        this.display()
+    }
+
+    display() {
+        const studentList = JSON.parse(localStorage.getItem('studentList')) || []
+        const tbodyTag = document.querySelector('tbody')
+        tbodyTag.innerHTML = ``
+        if (studentList) {
+            if (studentList.length > 0) {
+                studentList.forEach((student) => {
+                    /*tbodyTag.innerHTML += `<tr>
+                        <td>${student.id}</td>
+                        <td>${student.lastname}</td>
+                        <td>${student.firstname}</td>
+                        <td>${student.address}</td>
+                        <td>${student.contact}</td>
+                        <td>
+                            <button>Edit</button>
+                            <button onclick="${this.delete(student.id)}">Delete</button>
+                        </td>
+                    </tr>`*/
+                    const trTag = document.createElement('tr')
+                    trTag.innerHTML = `
+                        <td>${student.id}</td>
+                        <td>${student.lastname}</td>
+                        <td>${student.firstname}</td>
+                        <td>${student.address}</td>
+                        <td>${student.contact}</td>
+                        <td>
+                            <button>Edit</button>
+                            <button>Delete</button>
+                        </td>
+                    `
+                    const deleteButtonTag = trTag.querySelector("button:nth-child(2)")
+                    if(deleteButtonTag){
+                        deleteButtonTag.addEventListener('click', () => {
+                            this.delete(student.id)
+                        })
+                    }
+                    
+                    tbodyTag.appendChild(trTag)
+                })
+            } else {
+                tbodyTag.innerHTML = `<tr>
+                    <td colspan="6" style='text-align:center;'>Aucun étudiant enregistré</td>
+                </tr>`
+            }
+
+        }
+    }
+}
+const student = new Student()
+student.registered()
+student.display()
+
+/* const STUDENT = {
+    firstname : "",
+    lastname : "toto",
+    contact : "",
+    adress : "",
+
+    registered : ()=>{
+
+    },
+
+    edit : ()=>{
+
+    },
+
+    delete : ()=>{
 
     }
 }
+console.log(STUDENT.lastname); */
+
+
+
+
+
+
