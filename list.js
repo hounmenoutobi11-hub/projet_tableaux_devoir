@@ -13,7 +13,7 @@ if (form_tag) {
         const usercontact = form_tag.querySelector('input[name="contact"]').value.trim();
 
         if (userlastname === '' || userfirstname === '' || useradress === '' || usercontact === '') {
-            alert("Remplis toutes les cases my gee ");
+            alert("Veuillez remplir tous les champs.");
             return;
         }
 
@@ -120,17 +120,7 @@ class Student {
         if (studentList) {
             if (studentList.length > 0) {
                 studentList.forEach((student) => {
-                    /*tbodyTag.innerHTML += `<tr>
-                        <td>${student.id}</td>
-                        <td>${student.lastname}</td>
-                        <td>${student.firstname}</td>
-                        <td>${student.address}</td>
-                        <td>${student.contact}</td>
-                        <td>
-                            <button>Edit</button>
-                            <button onclick="${this.delete(student.id)}">Delete</button>
-                        </td>
-                    </tr>`*/
+
                     const trTag = document.createElement('tr')
                     trTag.innerHTML = `
                         <td>${student.id}</td>
@@ -143,6 +133,15 @@ class Student {
                             <button>Delete</button>
                         </td>
                     `
+                    const editButtonTag = trTag.querySelector("button:nth-child(1)")
+                    if(editButtonTag){
+                        editButtonTag.addEventListener('click', () => {
+                            STUDENT.edit(student)
+                        })
+                    }
+
+
+
                     const deleteButtonTag = trTag.querySelector("button:nth-child(2)")
                     if(deleteButtonTag){
                         deleteButtonTag.addEventListener('click', () => {
@@ -165,7 +164,7 @@ const student = new Student()
 student.registered()
 student.display()
 
-/* const STUDENT = {
+const STUDENT = {
     firstname : "",
     lastname : "toto",
     contact : "",
@@ -175,15 +174,18 @@ student.display()
 
     },
 
-    edit : ()=>{
-
+    edit : (student)=>{
+        document.getElementById('firstname').value = student.firstname;
+        document.getElementById('lastname').value = student.lastname;
+        document.getElementById('adress').value = student.adress;
+        document.getElementById('contact').value = student.contact;
     },
 
     delete : ()=>{
 
     }
 }
-console.log(STUDENT.lastname); */
+console.log(STUDENT.lastname); 
 
 
 
