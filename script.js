@@ -129,8 +129,8 @@ class Student {
                         <td>${student.address}</td>
                         <td>${student.contact}</td>
                         <td>
-                            <button>Edit</button>
-                            <button>Delete</button>
+                            <button class="btn-edit">Edit</button>
+                            <button class="btn-delete">Delete</button>
                         </td>
                     `
                     const editButtonTag = trTag.querySelector("button:nth-child(1)")
